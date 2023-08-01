@@ -30,6 +30,8 @@
 
 #include <sodium.h>
 
+#include "PaxSolaris.Profiler/ProfilerMacroApi.h"
+
 #if YOJIMBO_DEBUG_MEMORY_LEAKS
 #include <map>
 #endif // YOJIMBO_DEBUG_MEMORY_LEAKS
@@ -3555,6 +3557,7 @@ namespace yojimbo
 
     void BaseServer::AdvanceTime( double time )
     {
+        PROFILE_FUNC();
         m_time = time;
         if ( IsRunning() )
         {
@@ -3880,6 +3883,7 @@ namespace yojimbo
 
     void Server::AdvanceTime( double time )
     {
+        PROFILE_FUNC();
         if ( m_server )
         {
             netcode_server_update( m_server, time );
@@ -3888,6 +3892,7 @@ namespace yojimbo
         NetworkSimulator * networkSimulator = GetNetworkSimulator();
         if ( networkSimulator && networkSimulator->IsActive() )
         {
+            PROFILE_SCOPE("Network Simulator");
             uint8_t ** packetData = (uint8_t**) alloca( sizeof( uint8_t*) * m_config.maxSimulatorPackets );
             int * packetBytes = (int*) alloca( sizeof(int) * m_config.maxSimulatorPackets );
             int * to = (int*) alloca( sizeof(int) * m_config.maxSimulatorPackets );
