@@ -1828,6 +1828,15 @@ namespace yojimbo
 
             if ( entry->block )
                 break;
+
+            if (entry->measuredBits > availableBits)
+            {
+                yojimbo_printf( YOJIMBO_LOG_LEVEL_ERROR, "Message %d is suspiciously large and will likely fail to send %d. Type: %d\n",
+                    m_sendMessageId,
+                    entry->measuredBits,
+                    entry->message->GetType());
+                SetErrorLevel( CHANNEL_ERROR_SEND_QUEUE_FULL );
+            }
             
             if ( entry->timeLastSent + m_config.messageResendTime <= m_time && availableBits >= (int) entry->measuredBits )
             {                
