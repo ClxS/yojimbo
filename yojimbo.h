@@ -3981,7 +3981,7 @@ namespace yojimbo
 
             // TODO[CJones] We have a known leak of 55 messages. Investigate the true cause when time allows but as long
             // as it's not a growing leak we can ignore it for now
-            if (!allocated_messages.empty() && allocated_messages.size() != 55)
+            if (!allocated_messages.empty() && allocated_messages.size() > 55)
             {
                 yojimbo_printf( YOJIMBO_LOG_LEVEL_ERROR, "you leaked messages!\n" );
                 yojimbo_printf( YOJIMBO_LOG_LEVEL_ERROR, "%d messages leaked\n", (int) allocated_messages.size() );

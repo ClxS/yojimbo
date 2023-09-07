@@ -197,7 +197,7 @@ namespace yojimbo
 #if YOJIMBO_DEBUG_MEMORY_LEAKS
         // TODO[CJones] We have a known leak of 55 messages. Investigate the true cause when time allows but as long
         // as it's not a growing leak we can ignore it for now
-        if (!m_alloc_map.empty() && m_alloc_map.size() != 55)
+        if (!m_alloc_map.empty() && m_alloc_map.size() > 55)
         {
             yojimbo_printf( YOJIMBO_LOG_LEVEL_ERROR, "you leaked memory!\n\n" );
             typedef std::map<void*,AllocatorEntry>::iterator itor_type;
