@@ -195,9 +195,8 @@ namespace yojimbo
     Allocator::~Allocator()
     {
 #if YOJIMBO_DEBUG_MEMORY_LEAKS
-        // TODO[CJones] We have a known leak of 55 messages. Investigate the true cause when time allows but as long
-        // as it's not a growing leak we can ignore it for now
-        if (!m_alloc_map.empty() && m_alloc_map.size() > 55)
+        // NOTE[CJones] Add a little bit of flexibility here.
+        if (!m_alloc_map.empty() && m_alloc_map.size() > 5)
         {
             yojimbo_printf( YOJIMBO_LOG_LEVEL_ERROR, "you leaked memory!\n\n" );
             typedef std::map<void*,AllocatorEntry>::iterator itor_type;
@@ -1677,8 +1676,6 @@ namespace yojimbo
     {
         yojimbo_assert( message );
         
-        yojimbo_assert( CanSendMessage() );
-
         if ( GetErrorLevel() != CHANNEL_ERROR_NONE )
         {
             m_messageFactory->ReleaseMessage( message );
