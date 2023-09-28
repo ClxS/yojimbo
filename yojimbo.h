@@ -3235,6 +3235,16 @@ namespace yojimbo
             }                                                                               \
         }                                                                                   \
         while(0)
+    
+    #define serialize_object_floating( stream, object )                                     \
+        do                                                                                  \
+        {                                                                                   \
+            if ( !yojimbo::Serialize( stream, object ) )                                    \
+            {                                                                               \
+                return false;                                                               \
+            }                                                                               \
+        }                                                                                   \
+        while(0)
 
     template <typename Stream> bool serialize_address_internal( Stream & stream, Address & address )
     {
