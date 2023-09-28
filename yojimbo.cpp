@@ -1830,9 +1830,9 @@ namespace yojimbo
 
             if (entry->measuredBits > availableBits)
             {
-                yojimbo_printf( YOJIMBO_LOG_LEVEL_ERROR, "Message %d is suspiciously large and will likely fail to send %d. Type: %d\n",
+                yojimbo_printf( YOJIMBO_LOG_LEVEL_ERROR, "Message %d is suspiciously large and will likely fail to send. Size: %d bytes. Type: %d\n",
                     m_sendMessageId,
-                    entry->measuredBits,
+                    entry->measuredBits / 8,
                     entry->message->GetType());
                 SetErrorLevel( CHANNEL_ERROR_SEND_QUEUE_FULL );
             }
